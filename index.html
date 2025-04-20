@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<script src="script.js"></script>
+
+<head>
+    <title>Incremental game test idk</title>
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+</head>
+<body>
+    <div style="width:100%;display:inline-block">
+        <b><p id="money" style="font-size:xx-large"></p></b>
+        <button onclick="onButtonPressed()">Get money</button><br><br>
+    </div>
+    <div style="width:20%;height:80%;display:inline-grid">
+        <div style="height:30%;display:block">
+            <p style="font-size:larger">Money factory</p>
+            <p id="autobuyers"></p>
+            <p id="autobuyersPrice"></p>
+            <p id="autobuyersMultiplier"></p>
+            <button onclick="buyAutobuyer()">Buy</button>
+        </div>
+
+        <div style="height:30%;width:80%;display:block">
+            <p style="font-size:larger">Money factory factory</p>
+            <p id="autobuyers2"></p>
+            <p id="autobuyersPrice2"></p>
+            <p id="autobuyersMultiplier2"></p>
+            <button onclick="buyAutobuyer2()">Buy</button>
+        </div>
+        <div id="autobuyerDiv3" style="height:40%;width:80%;display:block">
+            <p style="font-size:larger">Money factory factory factory</p>
+            <p id="autobuyers3"></p>
+            <p id="autobuyersPrice3"></p>
+            <p id="autobuyersMultiplier3"></p>
+            <button onclick="buyAutobuyer3()">Buy</button>
+        </div>
+    </div>
+
+    <div style="width:20%;display:inline-grid">
+        <div>
+            <p style="font-size:larger">Tickspeed</p>
+            <p>Make the game run faster</p>
+            <p id="tickspeed"></p>
+            <p id="tickspeedPrice"></p>
+            <button onclick="buyTickspeed()">Buy</button>
+        </div>
+
+        <div>
+            <p style="font-size:larger">Rebirth</p>
+            <p id="rebirthDesc"></p>
+            <p id="rebirths"></p>
+            <p id="rebirthPrice"></p>
+            <button onclick="rebirth()">Rebirth</button>
+        </div>
+
+        <div id="rebirthDiv2">
+            <p style="font-size:larger">Rebirth rebirth</p>
+            <p id="rebirthDesc2"></p>
+            <p id="rebirths2"></p>
+            <p id="rebirthPrice2"></p>
+            <button onclick="rebirth2()">Rebirth rebirth</button>
+        </div>
+    </div>
+
+    <div style="width:20%;display:inline-grid">
+        <div>
+            <p style="font-size:larger">Perks</p>
+            <p id="perk1">2 rebirths: You start with 10 money</p>
+            <p id="perk2">3 rebirths: Factory purchase multiplier becomes x2</p>
+            <p id="perk3">4 rebirths: Money factory factory multiplier also affects money factories with reduced effect</p>
+            <p id="perk4">5 rebirths: You start with three money factories, rebirth now quadruples production</p>
+            <p id="perk5">6 rebirths: Unlock factory autobuyers</p>
+            <p id="perk6">8 rebirths: Unlock a new prestige layer</p>
+            <p id="perk7">10 rebirths: Unlock tickspeed autobuyer, multiplier to factories based on tickspeed</p>
+        </div>
+    </div>
+
+    <div style="width:20%;display:inline-grid">
+        <div id="perks2">
+            <p style="font-size:larger">Perk perks</p>
+            <p id="perk21">2 rebirth rebirths: Multiplier to factory factories based on rebirths</p>
+            <p id="perk22">3 rebirth rebirths: Start every rebirth rebirth with 4 rebirths</p>
+            <p id="perk23">4 rebirth rebirths: Start every rebirth rebirth with 8 rebirths</p>
+            <p id="perk24">5 rebirth rebirths: Unlock factory factory factories</p>
+        </div>
+    </div>
+</body>
