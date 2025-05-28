@@ -222,7 +222,7 @@ function rebirth(){
 function rebirth2(){
     if(rebirths >= rebirthPrice2){
         rebirths2 = rebirths2 + 1;
-
+        
         for(var i = 0; i < perks.length; i++){
             perks[i] = 0;
         }
@@ -235,8 +235,14 @@ function rebirth2(){
         resetFactories();
         if(perks2[2] == 1){
             rebirths = 8;
+            for(var i = 0; i < 6; i++){
+                perks[i] = 1;
+            }
         }else if(perks2[1] == 1){
             rebirths = 4;
+            for(var i = 0; i < 3; i++){
+                perks[i] = 1;
+            }
         }else{
             rebirths = 0;
         }
@@ -248,7 +254,7 @@ function roundNDecimals(x, i){
 }
 
 function scientificNotation(x){
-    if(x >= 1000000){
+    if(x >= 1000000 && x != Infinity){
         var exponent = Math.floor(Math.log10(x));
         var mantissa = roundNDecimals(x / (10 ** exponent), 3);
 
