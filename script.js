@@ -249,6 +249,14 @@ function rebirth2(){
     }
 }
 
+function changelog(){
+    if(document.getElementById("changelog").style.visibility == "hidden"){
+        document.getElementById("changelog").style.visibility = "visible"
+    }else{
+        document.getElementById("changelog").style.visibility = "hidden"
+    }
+}
+
 function roundNDecimals(x, i){
     return Math.round(x * (10 ** i)) / (10 ** i);
 }
