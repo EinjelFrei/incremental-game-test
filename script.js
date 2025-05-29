@@ -23,7 +23,10 @@ var rebirths2 = 0;
 var rebirthPrice2 = 0;
 
 var perks = [0, 0, 0, 0, 0, 0, 0];
+var perksPrices = [2, 3, 4, 5, 6, 8, 10];
+
 var perks2 = [0, 0, 0, 0];
+var perks2Prices = [2, 3, 4, 5];
 
 var victory = false;
 
@@ -58,42 +61,20 @@ setInterval(function(){
     document.getElementById("rebirthPrice2").innerHTML = "Price: " + rebirthPrice2 + " rebirths"
     document.getElementById("rebirthDesc2").innerHTML = "Reset everything to quadruple your factory factory production";
 
-    if(perks[0] == 1){
-        document.getElementById("perk1").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk1").style.fontWeight = "normal";
-    }
-    if(perks[1] == 1){
-        document.getElementById("perk2").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk2").style.fontWeight = "normal";
-    }
-    if(perks[2] == 1){
-        document.getElementById("perk3").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk3").style.fontWeight = "normal";
-    }
+    perks.forEach(function(x, i){
+        perks[i] = rebirths >= perksPrices[i];
+
+        if(x == 1){
+            document.getElementById("perk" + (i + 1)).style.fontWeight = "bold";
+        }else{
+            document.getElementById("perk" + (i + 1)).style.fontWeight = "normal";
+        }
+    })
+
     if(perks[3] == 1){
-        document.getElementById("perk4").style.fontWeight = "bold";
         document.getElementById("rebirthDesc").innerHTML = "Reset all factories to quadruple your money production";
     }else{
-        document.getElementById("perk4").style.fontWeight = "normal";
         document.getElementById("rebirthDesc").innerHTML = "Reset all factories to double your money production";
-    }
-    if(perks[4] == 1){
-        document.getElementById("perk5").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk5").style.fontWeight = "normal";
-    }
-    if(perks[5] == 1){
-        document.getElementById("perk6").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk6").style.fontWeight = "normal";
-    }
-    if(perks[6] == 1){
-        document.getElementById("perk7").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk7").style.fontWeight = "normal";
     }
 
     if(perks[5] == 1 || rebirths2 >= 1){
@@ -106,29 +87,21 @@ setInterval(function(){
         document.getElementById("perk6").innerHTML = "8 rebirths: Unlock a new prestige layer";
     }
 
-    if(perks2[0] == 1){
-        document.getElementById("perk21").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk21").style.fontWeight = "normal";
-    }
-    if(perks2[1] == 1){
-        document.getElementById("perk22").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk22").style.fontWeight = "normal";
-    }
-    if(perks2[2] == 1){
-        document.getElementById("perk23").style.fontWeight = "bold";
-    }else{
-        document.getElementById("perk23").style.fontWeight = "normal";
-    }
+    perks2.forEach(function(x, i){
+        perks2[i] = rebirths2 >= perks2Prices[i];
+
+        if(x == 1){
+            document.getElementById("perk2" + (i + 1)).style.fontWeight = "bold";
+        }else{
+            document.getElementById("perk2"+ (i + 1)).style.fontWeight = "normal";
+        }
+    })
+
     if(perks2[3] == 1){
-        document.getElementById("perk24").style.fontWeight = "bold";
         document.getElementById("autobuyerDiv3").style.visibility = "visible";
     }else{
-        document.getElementById("perk24").style.fontWeight = "normal";
         document.getElementById("autobuyerDiv3").style.visibility = "hidden";
     }
-    
 
     money = Math.ceil(money + (autobuyers * ((1.5 + (0.5 * perks[1])) ** autobuyersBought) * (((1.5 + (0.5 * perks[1]) ** autobuyersBought2) * perks[2] * 0.25) + 1) * ((2 + (2 * perks[3])) ** rebirths) * (1 + (0.2 * tickspeed * perks[6])) * tickspeed));
     autobuyers = Math.ceil(autobuyers + (autobuyers2 * ((1.5 + (0.5 * perks[1])) ** autobuyersBought2) * (4 ** rebirths2) * (1 + (4 * rebirths * perks2[0])) * tickspeed));
@@ -206,15 +179,6 @@ function resetFactories(){
 function rebirth(){
     if(autobuyers2 >= rebirthPrice){
         rebirths = rebirths + 1;
-
-        perks[0] = rebirths >= 2;
-        perks[1] = rebirths >= 3;
-        perks[2] = rebirths >= 4;
-        perks[3] = rebirths >= 5;
-        perks[4] = rebirths >= 6;
-        perks[5] = rebirths >= 8;
-        perks[6] = rebirths >= 10;
-
         resetFactories();
     }
 }
@@ -226,12 +190,6 @@ function rebirth2(){
         for(var i = 0; i < perks.length; i++){
             perks[i] = 0;
         }
-
-        perks2[0] = rebirths2 >= 2;
-        perks2[1] = rebirths2 >= 3;
-        perks2[2] = rebirths2 >= 4;
-        perks2[3] = rebirths2 >= 5;
-
         resetFactories();
         if(perks2[2] == 1){
             rebirths = 8;
