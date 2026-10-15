@@ -62,12 +62,18 @@ setInterval(function(){
     document.getElementById("rebirthDesc2").innerHTML = "Reset everything to quadruple your factory factory production";
 
     perks.forEach(function(x, i){
-        perks[i] = rebirths >= perksPrices[i];
-
         if(x == 1){
             document.getElementById("perk" + (i + 1)).style.fontWeight = "bold";
         }else{
             document.getElementById("perk" + (i + 1)).style.fontWeight = "normal";
+        }
+    })
+
+    perks2.forEach(function(x, i){
+        if(x == 1){
+            document.getElementById("perk2" + (i + 1)).style.fontWeight = "bold";
+        }else{
+            document.getElementById("perk2"+ (i + 1)).style.fontWeight = "normal";
         }
     })
 
@@ -86,16 +92,6 @@ setInterval(function(){
         document.getElementById("perks2").style.visibility = "hidden";
         document.getElementById("perk6").innerHTML = "8 rebirths: Unlock a new prestige layer";
     }
-
-    perks2.forEach(function(x, i){
-        perks2[i] = rebirths2 >= perks2Prices[i];
-
-        if(x == 1){
-            document.getElementById("perk2" + (i + 1)).style.fontWeight = "bold";
-        }else{
-            document.getElementById("perk2"+ (i + 1)).style.fontWeight = "normal";
-        }
-    })
 
     if(perks2[3] == 1){
         document.getElementById("autobuyerDiv3").style.visibility = "visible";
@@ -179,6 +175,11 @@ function resetFactories(){
 function rebirth(){
     if(autobuyers2 >= rebirthPrice){
         rebirths = rebirths + 1;
+
+        perks.forEach(function(x, i){
+            perks[i] = rebirths >= perksPrices[i];
+        })
+
         resetFactories();
     }
 }
@@ -190,6 +191,11 @@ function rebirth2(){
         for(var i = 0; i < perks.length; i++){
             perks[i] = 0;
         }
+
+        perks2.forEach(function(x, i){
+            perks2[i] = rebirths2 >= perks2Prices[i];
+        })
+
         resetFactories();
         if(perks2[2] == 1){
             rebirths = 8;
