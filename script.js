@@ -29,6 +29,9 @@ var perks2 = [0, 0, 0, 0];
 var perks2Prices = [2, 3, 4, 5];
 
 var victory = false;
+var cheater = false;
+
+var tempSaveData;
 
 setInterval(function(){
     document.getElementById("money").innerHTML = "Money: " + scientificNotation(money);
@@ -104,7 +107,12 @@ setInterval(function(){
     autobuyers2 = Math.ceil(autobuyers2 + autobuyers3 * tickspeed);
 
     if(money == Infinity && victory == false){
-        alert("ok you win");
+        if(cheater == true){
+            alert("u r cheetah so f00k u no w 4 u");
+        }else{
+            alert("ok you win");
+        }
+
         victory = true;
     }
 }, 50)
@@ -156,6 +164,16 @@ function buyTickspeed(){
     }
 }
 
+function applyPerks(){
+    perks.forEach(function(x, i){
+        perks[i] = rebirths >= perksPrices[i];
+    })
+
+    perks2.forEach(function(x, i){
+        perks2[i] = rebirths2 >= perks2Prices[i];
+    })
+}
+
 function resetFactories(){
     money = 10 * perks[0];
 
@@ -176,9 +194,7 @@ function rebirth(){
     if(autobuyers2 >= rebirthPrice){
         rebirths = rebirths + 1;
 
-        perks.forEach(function(x, i){
-            perks[i] = rebirths >= perksPrices[i];
-        })
+        applyPerks();
 
         resetFactories();
     }
@@ -192,11 +208,10 @@ function rebirth2(){
             perks[i] = 0;
         }
 
-        perks2.forEach(function(x, i){
-            perks2[i] = rebirths2 >= perks2Prices[i];
-        })
+        applyPerks();
 
         resetFactories();
+
         if(perks2[2] == 1){
             rebirths = 8;
             for(var i = 0; i < 6; i++){
@@ -235,3 +250,120 @@ function scientificNotation(x){
         return x;
     }
 }
+
+function dataToSave(){
+    return [money,
+    autobuyers, autobuyersBought, autobuyersPrice,
+    autobuyers2, autobuyersBought2, autobuyersPrice2,
+    autobuyers3, autobuyersBought3, autobuyersPrice3,
+    tickspeed, tickspeedBought, tickspeedPrice,
+    rebirths, rebirthPrice,
+    rebirths2, rebirthPrice2,
+    perks, perks2, victory, cheater
+    ]
+}
+
+function save(){
+    //setCookie("saveData", dataToSave(), 100000000);
+    tempSaveData = dataToSave();
+
+    alert("Data saved!");
+}
+
+function load(){
+    //let saveData = getCookie("saveData");
+
+    let saveData = tempSaveData;
+
+    if(saveData != ""){
+        money = saveData[0];
+        autobuyers = saveData[1];
+        autobuyersBought = saveData[2];
+        autobuyersPrice = saveData[3];
+        autobuyers2 = saveData[4];
+        autobuyersBought2 = saveData[5];
+        autobuyersPrice2 = saveData[6];
+        autobuyers3 = saveData[7];
+        autobuyersBought3 = saveData[8];
+        autobuyersPrice3 = saveData[9];
+        tickspeed = saveData[10];
+        tickspeedBought = saveData[11];
+        tickspeedPrice = saveData[12];
+        rebirths = saveData[13];
+        rebirthPrice = saveData[14];
+        rebirths2 = saveData[15];
+        rebirthPrice2 = saveData[16];
+        perks = saveData[17];
+        perks2 = saveData[18];
+        victory = saveData[19];
+        cheater = saveData[20];
+
+        applyPerks();
+
+        alert("Data loaded!");
+    }else{
+        alert("No data to load!");
+    }
+}
+
+function reset(){
+    let resetPrompt = prompt("This will reset EVERYTHING and delete your save. Are you sure you want to reset?\n\nType \"RESET\" (case sensitive) in the box below and confirm to proceed.");
+
+    if(resetPrompt == "RESET"){
+        //setCookie("saveData", "", 0);
+        tempSaveData = "";
+
+        rebirths = 0;
+        rebirthPrice = 0;
+        rebirths2 = 0;
+        rebirthPrice2 = 0;
+        perks = [0, 0, 0, 0, 0, 0, 0];
+        perks2 = [0, 0, 0, 0];
+        victory = false;
+        cheater = false;
+        resetFactories();
+
+        applyPerks();
+
+        alert("Data has been reset!");
+    }else if(resetPrompt == null){
+        alert("Data reset has been aborted!");
+    }else{
+        alert("An incorrect text has been entered!");
+    }
+}
+
+function setCookie(cname, cvalue, exdays){
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*3600*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires;
+}
+
+function getCookie(cname){
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 1; i < ca.length; i++){
+        let c = ca[i];
+        while(c.charAt(0) == ' '){
+            c = c.substring(1);
+        }
+        if(c.indexOf(name) == 0){
+            return c.substring(name.length, c.length);
+        }
+    }
+
+    return "";
+}
+
+function deleteCookie(cname){
+    document.cookie = cname + "=" + getCookie(cname) + ";expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
+addEventListener("keydown", (event) => {
+    if(event.keyCode === 123){
+        alert("cheetah");
+        cheater = true;
+    }
+});
