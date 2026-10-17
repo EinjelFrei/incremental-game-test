@@ -31,8 +31,6 @@ var perks2Prices = [2, 3, 4, 5];
 var victory = false;
 var cheater = false;
 
-var tempSaveData;
-
 setInterval(function(){
     document.getElementById("money").innerHTML = "Money: " + scientificNotation(money);
 
@@ -264,16 +262,13 @@ function dataToSave(){
 }
 
 function save(){
-    //setCookie("saveData", dataToSave(), 100000000);
-    tempSaveData = dataToSave();
+    setCookie("saveData", dataToSave(), 100000000);
 
     alert("Data saved!");
 }
 
 function load(){
-    //let saveData = getCookie("saveData");
-
-    let saveData = tempSaveData;
+    let saveData = getCookie("saveData");
 
     if(saveData != ""){
         money = saveData[0];
@@ -310,8 +305,7 @@ function reset(){
     let resetPrompt = prompt("This will reset EVERYTHING and delete your save. Are you sure you want to reset?\n\nType \"RESET\" (case sensitive) in the box below and confirm to proceed.");
 
     if(resetPrompt == "RESET"){
-        //setCookie("saveData", "", 0);
-        tempSaveData = "";
+        setCookie("saveData", "", 0);
 
         rebirths = 0;
         rebirthPrice = 0;
